@@ -1,0 +1,22 @@
+<h1>This is the "delicious" <%= @cocktail.name %></h1>
+
+  <ul>
+    <li>
+    <%= @cocktail.name %>
+    <% @cocktail.doses.each do |dose| %>
+      <li>
+        <%= dose.ingredient.name %>  -- Description: <%= dose.description %>
+        <%=  link_to 'exterminate this silly ingredient',  dose_path(dose), method: :delete%>
+      </li>
+    </li>
+    <% end %>
+  </ul>
+
+<%= simple_form_for [@cocktail, @dose] do |f| %>
+  <%= f.association :ingredient %>
+  <%= f.input :description %>
+  <%= f.submit "Add your 'wonderful' ingredient" %>
+<% end %>
+
+
+<%= link_to 'back to the "great" list of cocktails',  cocktails_path %>
